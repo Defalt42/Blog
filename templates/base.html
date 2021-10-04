@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <title>My Blog Project | {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header id="top">
+            <div>
+                <a href="#">My Blog Project</a>
+            </div>
+        </header>
+        <main>
+            {% block mainContent %}{% endblock %}
+        </main>
+        <footer></footer>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>
