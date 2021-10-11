@@ -15,7 +15,7 @@ class Post(db.Model):
     author = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text)
-    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     category = db.relationship('Category', backref=db.backref('posts', lazy=True))

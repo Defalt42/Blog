@@ -30,8 +30,9 @@ def index():
 @app.route('/new-post', methods=['GET','POST'])
 def add_post():
     if request.form:
+        category = Category(name=request.form['category'])
         post = Post(author=request.form['author'], title=request.form['title'], 
-            category=request.form['category'],
+            category=category,
             content=request.form['content'])
         
         db.session.add(post)
