@@ -20,9 +20,14 @@ def add_post():
             content=request.form['content'])
         
         db.session.add(post)
-        db.session.commit()
 
-        return redirect(url_for('index'))
+        try:
+            db.session.commit()
+            return redirect(url_for('index'))
+        except IntegrityError:
+            db.session.rollback()
+            # error, there already is a user using this bank address or other
+            # constraint failed
 
     categories = Category.query.all()
 
