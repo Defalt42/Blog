@@ -9,9 +9,19 @@
     <body>
         <header id="top">
             <div>
-                <a href="#">My Blog Project</a>
+                <a href="/">My Blog Project</a>
             </div>
         </header>
+        <div class="container">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link"  href="{{ url_for('add_post') }}">New Post</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('add_category') }}">New Category</a>
+                </li>
+              </ul>
+        </div>
         <main>
             {% block mainContent %}{% endblock %}
         </main>

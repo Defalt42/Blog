@@ -12,8 +12,12 @@
                 <input type="text" class="form-control" name="author" id="author">
             </div>
             <div class="w-50 col-auto mb-3">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" name="category" id="category">
+                <select name="category" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="w-50 mb-3">
                 <label hidden for="content" class="form-label">Content</label>
