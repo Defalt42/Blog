@@ -1,16 +1,20 @@
-from flask import render_template, url_for, request, redirect
+from flask import Blueprint, render_template, url_for, request, redirect
 
-from models import db, Post, Category, app
+from . import db
+from models import Post, Category
 from sqlalchemy.exc import IntegrityError
 
-@app.route("/")
+
+main = Blueprint('main', __name__)
+
+@main.route("/")
 def index():
     posts = Post.query.order_by(Post.pub_date.desc()).all()
 
     return render_template("index.html", posts=posts)
 
 
-@app.route('/new-post', methods=['GET','POST'])
+@main.route('/new-post', methods=['GET','POST'])
 def add_post():
     if request.form:
         category_name = request.form['category']
@@ -33,7 +37,7 @@ def add_post():
 
     return render_template('newpost.html', categories=categories)
 
-@app.route('/new-category', methods=['GET', 'POST'])
+@main.route('/new-category', methods=['GET', 'POST'])
 def add_category():
     if request.form:
         category = Category(name=request.form['category'])
@@ -48,7 +52,3 @@ def add_category():
 
         
     return render_template('newcategory')
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)

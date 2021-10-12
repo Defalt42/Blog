@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block mainContent %}
+    <div class="container w-50">
+        <form action="{{ url_for('add_post') }}" method="POST">
+            <div class="w-50 mb-3">
+                <label for="title" class="form-label">Post Title</label>
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+            <div class="w-50 mb-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" class="form-control" name="author" id="author">
+            </div>
+            <div class="w-50 col-auto mb-3">
+                <select name="category" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="w-50 mb-3">
+                <label hidden for="content" class="form-label">Content</label>
+                <textarea name="content" id="content" cols="100" rows="10"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
