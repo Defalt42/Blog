@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, url_for, request, redirect
 
 from . import db
-from models import Post, Category
+from werkzeug.security import generate_password_hash, check_password_hash
+from .models import User
 from sqlalchemy.exc import IntegrityError
 
 

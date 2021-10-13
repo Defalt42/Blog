@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, request, redirect
 
 from . import db
-from models import Post, Category
+from .models import Post, Category
 from sqlalchemy.exc import IntegrityError
 
 
@@ -27,7 +27,7 @@ def add_post():
 
         try:
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('main.index'))
         except IntegrityError:
             db.session.rollback()
             # error, there already is a user using this bank address or other
@@ -44,11 +44,11 @@ def add_category():
         db.session.add(category)
         try:
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('main.index'))
         except IntegrityError:
             db.session.rollback()
             # error, there already is a user using this bank address or other
             # constraint failed
 
         
-    return render_template('newcategory')
+    return render_template('newcategory.html')
