@@ -1,84 +1,33 @@
 {% extends "base.html" %}
 
+{% block pageTitle %}My Flask Blog{% endblock %}
+{% block subTitle %}This is a fun Python Flask project!{% endblock %}
+
 {% block mainContent %}
-    <h1>Homepage</h1>
-    <section class="posts">
-        {% for post in posts %}
-            <article>
-                <div class="postImage">
-                    <a href="#">
-                        <img src="{{ url_for('static', filename='images/img-1.jpg') }}" alt="">
-                    </a>
-                </div>
-                <div class="postDetails">
-                    <p class="postCategory">{{ post.category }}</p>
-                    <h2 class="postTitle">{{ post.title }}</h2>
-                    <div class="meta">
-                        <p class="byline">{{ post.pub_date }} by {{ post.author }}</p>
-                    </div>
-                    <p class="postDescription">{{ post.content }}</p>
-                </div>
-            </article>
-        {% endfor %}
-        <!-- <article>
-            <div class="postImage">
-                <a href="#">
-                    <img src="{{ url_for('static', filename='images/img-1.jpg') }}" alt="">
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            {% for post in posts %}
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    {% if post.sub_title %}
+                        <h3 class="post-subtitle">{{ post.sub_title }}</h3>
+                    {% endif %}
                 </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">{{ post.author }}</a>
+                    on <span>{{ post.pub_date }}</span>
+                </p>
             </div>
-            <div class="postDetails">
-                <p class="postCategory">PHOTOGRAPHY</p>
-                <h2 class="postTitle">Mastering Exposure</h2>
-                <div class="meta">
-                    <p class="byline">Oct. 14, 2021 by Bryan Gilbert</p>
-                </div>
-                <p class="postDescription">Ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae. Id diam maecenas ultricies mi. 
-                    Nisi quis eleifend quam adipiscing vitae. Enim eu turpis egestas pretium. Eu consequat ac felis donec et odio pellentesque diam. 
-                    Cursus mattis molestie a iaculis at erat pellentesque adipiscing. In aliquam sem fringilla ut morbi tincidunt augue. Felis bibendum 
-                    ut tristique et egestas quis ipsum suspendisse. Sed nisi lacus sed viverra tellus in hac habitasse platea. Scelerisque mauris pellentesque 
-                    pulvinar pellentesque habitant morbi tristique senectus et. Porta non pulvinar neque laoreet suspendisse. Sed libero enim sed faucibus turpis in eu. 
-                    Nisl condimentum id venenatis a condimentum vitae sapien. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque.</p>
-            </div>
-        </article>
-        <article>
-            <div class="postImage">
-                <a href="#">
-                    <img src="{{ url_for('static', filename='images/img-1.jpg') }}" alt="">
-                </a>
-            </div>
-            <div class="postDetails">
-                <p class="postCategory">PRODUCTIVITY</p>
-                <h2 class="postTitle">Organizing Your Tasks</h2>
-                <div class="meta">
-                    <p class="byline">Oct. 14, 2021 by Bryan Gilbert</p>
-                </div>
-                <p class="postDescription">Ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae. Id diam maecenas ultricies mi. 
-                    Nisi quis eleifend quam adipiscing vitae. Enim eu turpis egestas pretium. Eu consequat ac felis donec et odio pellentesque diam. 
-                    Cursus mattis molestie a iaculis at erat pellentesque adipiscing. In aliquam sem fringilla ut morbi tincidunt augue. Felis bibendum 
-                    ut tristique et egestas quis ipsum suspendisse. Sed nisi lacus sed viverra tellus in hac habitasse platea. Scelerisque mauris pellentesque 
-                    pulvinar pellentesque habitant morbi tristique senectus et. Porta non pulvinar neque laoreet suspendisse. Sed libero enim sed faucibus turpis in eu. 
-                    Nisl condimentum id venenatis a condimentum vitae sapien. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque.</p>
-            </div>
-        </article>
-        <article>
-            <div class="postImage">
-                <a href="#">
-                    <img src="{{ url_for('static', filename='images/img-1.jpg') }}" alt="">
-                </a>
-            </div>
-            <div class="postDetails">
-                <p class="postCategory">FINANCE</p>
-                <h2 class="postTitle">Buy More Assets</h2>
-                <div class="meta">
-                    <p class="byline">Oct. 14, 2021 by Bryan Gilbert</p>
-                </div>
-                <p class="postDescription">Ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae. Id diam maecenas ultricies mi. 
-                    Nisi quis eleifend quam adipiscing vitae. Enim eu turpis egestas pretium. Eu consequat ac felis donec et odio pellentesque diam. 
-                    Cursus mattis molestie a iaculis at erat pellentesque adipiscing. In aliquam sem fringilla ut morbi tincidunt augue. Felis bibendum 
-                    ut tristique et egestas quis ipsum suspendisse. Sed nisi lacus sed viverra tellus in hac habitasse platea. Scelerisque mauris pellentesque 
-                    pulvinar pellentesque habitant morbi tristique senectus et. Porta non pulvinar neque laoreet suspendisse. Sed libero enim sed faucibus turpis in eu. 
-                    Nisl condimentum id venenatis a condimentum vitae sapien. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque.</p>
-            </div>
-        </article> -->
-    </section>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        </div>
+    </div>
+</div>
 {% endblock %}
