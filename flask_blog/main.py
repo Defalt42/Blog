@@ -13,6 +13,9 @@ def index():
 
     return render_template("index.html", posts=posts)
 
+@main.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 @main.route('/new-post', methods=['GET','POST'])
 def add_post():
