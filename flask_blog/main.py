@@ -17,6 +17,10 @@ def index():
 def contact():
     return render_template("contact.html")
 
+@main.route("/about")
+def about():
+    return render_template("about.html")
+
 @main.route('/new-post', methods=['GET','POST'])
 def add_post():
     if request.form:

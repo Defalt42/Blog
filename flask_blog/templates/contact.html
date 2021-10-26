@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    {{ super() }}
+    <style>
+        header.masthead {
+            background-image: url("{{url_for('static', filename='images/contact-bg.jpg')}}")
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Contact Me {{ super() }}{% endblock %}
+
 {% block pageHeading %}Contact Me{% endblock %}
 {% block subHeading %}Have questions? I have answers.{% endblock %}
 

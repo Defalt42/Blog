@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {{ super() }}
+    <style>
+        header.masthead {
+            background-image: url("{{url_for('static', filename='images/home-bg.jpg')}}")
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Home {{ super() }}{% endblock %}
+
 {% block pageHeading %}My Flask Blog{% endblock %}
 {% block subHeading %}This is a fun Python Flask project!{% endblock %}
 
