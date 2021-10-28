@@ -21,11 +21,16 @@ def contact():
 def about():
     return render_template("about.html")
 
+@main.route("/post/<int:id>")
+def post(id):
+    post = Post.query.get(id)
+    return render_template("post.html", post=post)
+
 @main.route('/new-post', methods=['GET','POST'])
 def add_post():
     if request.form:
         post = Post(author=request.form['author'], title=request.form['title'], 
-            content=request.form['content'])
+            sub_title=request.form['sub_title'], content=request.form['content'])
         
         db.session.add(post)
 

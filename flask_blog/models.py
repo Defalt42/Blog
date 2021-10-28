@@ -8,6 +8,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(80), nullable=False)
+    sub_title = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
