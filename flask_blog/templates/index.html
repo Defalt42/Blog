@@ -7,12 +7,16 @@
             background-image: url("{{url_for('static', filename='images/home-bg.jpg')}}")
         }
     </style>
-{% endblock %}
+{% endblock head %}
 
-{% block title %}Home {{ super() }}{% endblock %}
+{% block title %}Home {{ super() }}{% endblock title %}
 
-{% block pageHeading %}My Flask Blog{% endblock %}
-{% block subHeading %}This is a fun Python Flask project!{% endblock %}
+{% block pageHeading %}
+    <div class="site-heading">
+        <h1>My Flask Blog</h1>
+        <span class="subheading">This is a fun Python Flask project!</span>
+    </div>
+{% endblock pageHeading %}
 
 {% block mainContent %}
 <div class="container px-4 px-lg-5">
@@ -41,4 +45,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock mainContent %}

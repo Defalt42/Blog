@@ -11,8 +11,12 @@
 
 {% block title %}Contact Me {{ super() }}{% endblock %}
 
-{% block pageHeading %}Contact Me{% endblock %}
-{% block subHeading %}Have questions? I have answers.{% endblock %}
+{% block pageHeading %}
+    <div class="site-heading">
+        <h1>Contact Me</h1>
+        <span class="subheading">Have questions? I have answers.</span>
+    </div>
+{% endblock %}
 
 {% block mainContent %}
 <main class="mb-4">
