@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, url_for, request, redirect
 from . import db
 from .models import Post
 from sqlalchemy.exc import IntegrityError
-
+import datetime
 
 main = Blueprint('main', __name__)
 
@@ -24,9 +24,10 @@ def about():
 @main.route("/post/<int:id>")
 def post(id):
     post = Post.query.get(id)
+
     return render_template("post.html", post=post)
 
-@main.route('/new-post', methods=['GET','POST'])
+@main.route('/addpost', methods=['GET','POST'])
 def add_post():
     if request.form:
         post = Post(author=request.form['author'], title=request.form['title'], 
@@ -42,4 +43,4 @@ def add_post():
             # error, there already is a user using this bank address or other
             # constraint failed
 
-    return render_template('newpost.html')
+    return render_template('addpost.html')

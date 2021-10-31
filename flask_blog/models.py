@@ -10,7 +10,7 @@ class Post(db.Model):
     title = db.Column(db.String(80), nullable=False)
     sub_title = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text)
-    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
