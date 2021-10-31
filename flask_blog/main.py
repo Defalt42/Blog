@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, url_for, request, redirect
 from . import db
 from .models import Post
 from sqlalchemy.exc import IntegrityError
-import datetime
+from flask_login import LoginManager, login_required
 
 main = Blueprint('main', __name__)
 
@@ -28,6 +28,7 @@ def post(id):
     return render_template("post.html", post=post)
 
 @main.route('/addpost', methods=['GET','POST'])
+@login_required
 def add_post():
     if request.form:
         post = Post(author=request.form['author'], title=request.form['title'], 
