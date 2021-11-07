@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, request, redirect, flash
+from flask import Blueprint, render_template, url_for, request, redirect, flash, abort
 from flask_login.utils import login_required
 
 from . import db
@@ -13,8 +13,7 @@ auth = Blueprint('auth', __name__)
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
-
-    if request.method == 'POST':
+    if login_form.validate_on_submit():
         email = request.form['email']
         password = request.form['password']
 
@@ -24,14 +23,17 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user)
                 flash('Logged in successfully!')
-                return redirect(url_for('main.index'))
+                
+                next = request.args.get('next')
+
+                return redirect(next or url_for('main.index'))
             else:
                 flash('Incorrect email or password! Please try again.')
                 return redirect(url_for('auth.login')) 
         else:
             flash('Incorrect email or password! Please try again.')
             return redirect(url_for('auth.login'))
-
+    
     return render_template("login.html", login_form=login_form)
 
 @auth.route('/signup', methods=['GET','POST'])

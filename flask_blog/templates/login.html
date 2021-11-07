@@ -2,7 +2,7 @@
 
 {% block mainContent %}
 <div class="container w-50">
-    <form action="{{ url_for('auth.login') }}" method="POST">
+    <form action="{{ url_for('auth.login', next=request.url) }}" method="POST">
         {{ login_form.hidden_tag() }}
         <div class="mb-3">
             {{ login_form.email.label(class="form-label") }}
