@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, redirect, flash, abort
 from flask_login.utils import login_required
-from flask_sqlalchemy import _record_queries
 
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -31,7 +30,6 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                flash('Logged in successfully!')
 
                 return redirect_dest(fallback=url_for('main.index'))
             else:
