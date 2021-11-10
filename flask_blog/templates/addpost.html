@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block pageHeading %}
+<div class="site-heading">
+    <h1>Create a Post</h1>
+</div>
+{% endblock pageHeading %}
+
 {% block mainContent %}
     <div class="container">
         <form action="{{ url_for('main.add_post') }}" method="POST">
