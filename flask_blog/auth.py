@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, url_for, request, redirect, flash, abort
 from flask_login.utils import login_required
+from flask_sqlalchemy import _record_queries
 
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,6 +10,14 @@ from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, logout_user
 
 auth = Blueprint('auth', __name__)
+
+def redirect_dest(fallback):
+    dest = request.args.get('next')
+    try:
+        dest_url = url_for(dest)
+    except:
+        return redirect(fallback)
+    return redirect(dest_url)
 
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
@@ -23,10 +32,8 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user)
                 flash('Logged in successfully!')
-                
-                next = request.args.get('next')
 
-                return redirect(next or url_for('main.index'))
+                return redirect_dest(fallback=url_for('main.index'))
             else:
                 flash('Incorrect email or password! Please try again.')
                 return redirect(url_for('auth.login')) 
