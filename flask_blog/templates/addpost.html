@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block mainContent %}
-    <div class="container w-50">
+    <div class="container">
         <form action="{{ url_for('main.add_post') }}" method="POST">
-            <div class="w-50 mb-3">
+            <div class="mb-3">
                 <label for="title" class="form-label">Post Title</label>
                 <input type="text" class="form-control" name="title" id="title">
             </div>
-            <div class="w-50 mb-3">
+            <div class="mb-3">
                 <label for="sub_title" class="form-label">Post Subtitle</label>
                 <input type="text" class="form-control" name="sub_title" id="sub_title">
             </div>
@@ -15,9 +15,9 @@
                 <label for="author" class="form-label">Author</label>
                 <input type="text" class="form-control" name="author" id="author">
             </div> -->
-            <div class="w-50 mb-3">
+            <div class="mb-3">
                 <label hidden for="content" class="form-label">Content</label>
-                <textarea name="content" id="content" cols="100" rows="10"></textarea>
+                <textarea class="form-control" name="content" id="content" cols="100" rows="10"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
         </form>
