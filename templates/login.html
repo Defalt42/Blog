@@ -19,7 +19,7 @@
             {% endif %}
         {% endwith %}
     </div>
-    <form action="{{ url_for('auth.login', next=request.args.get('next')) }}" method="POST">
+    <form action="{{ url_for('login', next=request.args.get('next')) }}" method="POST">
         {{ login_form.hidden_tag() }}
         <div class="mb-3">
             {{ login_form.email.label(class="form-label") }}
