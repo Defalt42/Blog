@@ -8,12 +8,13 @@ from flask_login.utils import login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, SignupForm
 from sqlalchemy.exc import IntegrityError
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 
 db = SQLAlchemy(app)
-
 api = Api(app)
+ma = Marshmallow(app)
 
 app.config['SECRET_KEY'] = 'aksjdfkjdjfkjdkjfkajd34232322and'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
@@ -31,12 +32,28 @@ class Post(db.Model):
     content = db.Column(db.Text)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
+class PostSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "title", "content")
+        model = Post
+
+post_schema = PostSchema()
+posts_schema = PostSchema(many=True)
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name")
+        model = User
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -49,10 +66,17 @@ def handle_needs_login():
 # REST API
 class Posts(Resource):
     def get(self):
-        post = Post.query.order_by(Post.pub_date.desc()).all()
-        return jsonify({'Posts': ['Post 1']})
+        posts = Post.query.order_by(Post.pub_date.desc()).all()
+        return posts_schema.dump(posts)
 
 api.add_resource(Posts, '/posts')
+
+class Users(Resource):
+    def get(self):
+        users = User.query.all()
+        return users_schema.dump(users)
+
+api.add_resource(Users, '/users')
 
 # MAIN ROUTES
 @app.route("/")
